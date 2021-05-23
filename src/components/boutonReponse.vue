@@ -1,5 +1,5 @@
 <template>
-  <div :class="[!selectable && selectedByUser ? (correct ? 'bouton-vert' : 'bouton-orange') : 'bouton-reponse', 'u-full-width']"
+  <div :class="[!selectable && correct ? 'bouton-vert' : (!selectable && selectedByUser ? 'bouton-orange' : 'bouton-reponse'), 'u-full-width']"
        @click="clickReponse"
        :style="{cursor: selectable ? 'pointer' : 'not-allowed' }"
        v-html="reponse">

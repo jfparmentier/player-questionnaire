@@ -1,12 +1,12 @@
 <template>
 <div>
-  <h5 style="text-align:center">Question {{numeroQuestion}} / {{ nombreQuestions }}</h5>
+  <h5 style="text-align:center; margin-top: 2%">Question {{numeroQuestion}} / {{ nombreQuestions }}</h5>
   <question :question="question"
             @choix-utilisateur="reponseChoisie"
             :questionRepondue="questionRepondue"
             :reponseUtilisateur="reponseUtilisateur"/>
-  <p v-show="questionRepondue"><strong>Explication :</strong></p>
-  <span v-show="questionRepondue" v-html="question.explication"></span>
+  <p v-show="questionRepondue" style="margin-top : 2em"><strong>Explication :</strong></p>
+  <span v-show="questionRepondue" v-html="question.feedbacks[reponseUtilisateur] + question.explication"></span>
   <button v-show="questionRepondue"
           @click="reponseSuivante"
           class="button-primary u-full-width"
