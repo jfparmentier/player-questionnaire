@@ -1,22 +1,40 @@
 <template>
   <div id="app">
     <div class="container">
-      <h4>Coucou</h4>
+      <pageQuestion
+          v-show="!questionnaireTermine"
+          :question="questionnaire[numeroQuestion-1]"
+          :nombreQuestions="nombreQuestions"
+          :numeroQuestion="numeroQuestion"
+          @question-suivante="questionSuivante"
+          @bonne-reponse-choisie="score = score + 1"
+      />
+      <pageBilan
+          v-show="questionnaireTermine"
+          :score_pc="Math.round(score / nombreQuestions * 100)"
+          @restart="recommenceQuestionnaire"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import pageQuestion from "@/components/pageQuestion";
+import pageBilan from "@/components/pageBilan";
 
 export default {
   name: 'App',
   components: {
+    pageQuestion,
+    pageBilan
   },
   data: function() {
     return {
       numeroQuestion: 0,
       nombreQuestions: 0,
-      questionnaire: []
+      questionnaire: [],
+      questionnaireTermine: false,
+      score: 0
     }
   },
   created() {
@@ -31,6 +49,18 @@ export default {
     this.nombreQuestions = this.questionnaire.length;
     this.numeroQuestion = 1;
   },
+  methods: {
+    questionSuivante: function() {
+      this.numeroQuestion = Math.min( this.numeroQuestion + 1, this.nombreQuestions);
+      this.questionnaireTermine = (this.nombreQuestions === this.numeroQuestion);
+    },
+    recommenceQuestionnaire: function() {
+      this.numeroQuestion = 1;
+      this.questionnaireTermine = false;
+      this.score = 0;
+    }
+  }
+
 }
 </script>
 
