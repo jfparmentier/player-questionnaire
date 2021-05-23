@@ -51,8 +51,8 @@ export default {
   },
   methods: {
     questionSuivante: function() {
-      this.numeroQuestion = Math.min( this.numeroQuestion + 1, this.nombreQuestions);
-      this.questionnaireTermine = (this.nombreQuestions === this.numeroQuestion);
+      this.numeroQuestion = this.numeroQuestion + 1;
+      this.questionnaireTermine = (this.numeroQuestion > this.nombreQuestions);
     },
     recommenceQuestionnaire: function() {
       this.numeroQuestion = 1;

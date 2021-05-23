@@ -34,12 +34,6 @@ export default {
       reponseUtilisateur: 0
     }
   },
-  updated() {
-    // MAJ equations
-    // MathJax.typeset();
-    // revient en haut de la page
-    window.scrollTo(0, 0);
-  },
   methods: {
     reponseChoisie: function (index) {
       this.questionRepondue = true;
